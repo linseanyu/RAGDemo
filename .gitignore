@@ -18,3 +18,4 @@ faiss_index/
 dist/
 build/
 *.egg-info/ 
+env/
