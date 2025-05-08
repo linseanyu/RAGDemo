@@ -1,10 +1,9 @@
 import pandas as pd
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain.vectorstores import FAISS
-from langchain.llms import HuggingFacePipeline
+from langchain_community.vectorstores import FAISS
+from langchain_community.llms import HuggingFacePipeline
 from langchain.chains import RetrievalQA
-from transformers import pipeline
 
 #### Prepare Data ####
 
@@ -91,10 +90,6 @@ retriever = vector_store.as_retriever(
 )
 
 query = "What is the battery life of the Wireless Headphones?"
-retrieved_docs = retriever.invoke(query)
-for doc in retrieved_docs:
-    print(f"Source: {doc.metadata['source']} | Content: {doc.page_content}")
-
 
 #### Build RAG Pipeline ####
 
@@ -114,8 +109,5 @@ qa_chain = RetrievalQA.from_chain_type(
 )
 
 query = "What is the battery life of the Wireless Headphones?"
-result = qa_chain({"query": query})
+result = qa_chain.invoke({"query": query})
 print(f"Answer: {result['result']}")
-print("\nSource Documents:")
-for doc in result["source_documents"]:
-    print(f"Source: {doc.metadata['source']} | Content: {doc.page_content}")
