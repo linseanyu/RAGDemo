@@ -1,0 +1,9 @@
+pandas==2.0.3
+langchain
+langchain-text-splitters==0.0.1
+langchain-huggingface
+faiss-cpu==1.7.4
+transformers
+torch==2.1.2
+sentence-transformers
+langchain-community

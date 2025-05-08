@@ -1,0 +1,20 @@
+# Ignore CSV files
+*.csv
+
+# Python virtual environment
+.venv/
+venv/
+ragenv/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# FAISS index
+faiss_index/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/ 
