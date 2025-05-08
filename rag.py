@@ -96,8 +96,6 @@ retriever = vector_store.as_retriever(
     search_kwargs={"k": 5}  # Return top 5 chunks
 )
 
-query = "What is the battery life of the Wireless Headphones?"
-
 #### Build RAG Pipeline ####
 
 # Initialize language model
@@ -115,6 +113,22 @@ qa_chain = RetrievalQA.from_chain_type(
     return_source_documents=True
 )
 
-query = "What is the battery life of the Wireless Headphones?"
-result = qa_chain.invoke({"query": query})
-print(f"Answer: {result['result']}")
+# Interactive question answering loop
+print("\n=== RAG Product Assistant ===")
+print("Ask questions about products or past conversations (type 'exit' to quit)")
+print("Example: 'What is the battery life of the Wireless Headphones?'\n")
+
+while True:
+    user_query = input("Your question: ")
+    
+    if user_query.lower() in ["exit", "quit", "q"]:
+        print("Goodbye!")
+        break
+    
+    if not user_query.strip():
+        continue
+        
+    print("\nSearching for answer...")
+    result = qa_chain.invoke({"query": user_query})
+    
+    print(f"\nAnswer: {result['result']}")
